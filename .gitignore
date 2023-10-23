@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Sidetrade.Northwind/bin/Debug/net6.0
+/.vs/Sidetrade.Northwind
+/Sidetrade.Northwind/obj
