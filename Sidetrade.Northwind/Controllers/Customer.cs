@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Sidetrade.Northwind.Model_Entities
+namespace Sidetrade.Northwind.Controllers
 {
     [Table("Customers", Schema = "dbo")]
     public class Customer

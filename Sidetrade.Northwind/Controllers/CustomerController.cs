@@ -1,31 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sidetrade.Northwind.Model_Entities;
-using Sidetrade.Northwind.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sidetrade.Northwind.Controllers
 {
     [Route("api/[controller]")]
     public class CustomerController : ControllerBase 
     {
-        private readonly ICustomerRepository _cutomer;
+        private readonly CustomerDbContext _context;
 
-        public CustomerController(ICustomerRepository customer)
+        public CustomerController(CustomerDbContext context)
         {
-            _cutomer = customer ?? throw new ArgumentNullException(nameof(customer));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         [HttpGet]
         [Route("customers/{id}")]
         public async Task<IActionResult> GetCustomerByIdAsync(string id)
         {
-            return Ok(await _cutomer.GetCustomerById(id));
+            return Ok(await _context.Customers.FirstOrDefaultAsync(x => x.CustomerID == id));
         }
 
         [HttpGet]
         [Route("customers")]
         public async Task<IActionResult> GetAllCustomerAsync()
         {
-            return Ok(await _cutomer.GetAllCustomerAsync());
+            return Ok(await _context.Customers.ToListAsync());
         }
+    }
+
+    public class CustomerDbContext : DbContext
+    {
+        public CustomerDbContext(DbContextOptions<CustomerDbContext> options) : base(options) { }
+
+        public DbSet<Customer> Customers { get; set; }
     }
 }

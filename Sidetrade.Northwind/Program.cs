@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Sidetrade.Northwind.Model_Entities;
-using Sidetrade.Northwind.Repository;
+using Sidetrade.Northwind.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Dependency Injection
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddDbContext<CustomerDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CustomersApp")));
 
